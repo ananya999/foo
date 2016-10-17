@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 //import java.util.Map.Entry;
 
 /* ****************************************************************************************
@@ -119,6 +120,7 @@ class Order {
 	}
 
 	public OrderLine get(int i) {
+		
 		return orderLines.get(i);
 	}
 
@@ -139,7 +141,7 @@ class calculator {
 	 * 
 	 * For each order, print the total Sales Tax paid and Total price without taxes for this order
 	 */
-	public void calculate(Map<String, Order> o) {
+	public void calculate(Map<String, Order> o1) {
 		
 		double totalTax = 0;
 		double total = 0;
@@ -151,7 +153,7 @@ class calculator {
 		 
 
 		// Iterate through the orders
-		for (Map.Entry<String, Order> entry : o.entrySet()) {
+		for (Map.Entry<String, Order> entry : o1.entrySet()) {
 			System.out.println("*******" + entry.getKey() + "*******");
 			total=0;
 			Order r = entry.getValue();
@@ -205,7 +207,10 @@ public class Foo {
 
 	public static void main(String[] args) throws Exception {
 
+				
 		Map<String, Order> o = new HashMap<String, Order>();
+		 TreeMap<String, Order> o1 = new TreeMap<String, Order> (o);
+			
 		
 		Order d = new Order();
 		Order e = new Order();
@@ -214,7 +219,7 @@ public class Foo {
 		//Added different key values for all three orders to differentiate
 		//Removed the method c.clear as all the values are being cleared everytime and the output was null.
 		
-		o.put("Order 3", e);
+		o1.put("Order 3", e);
 
 		e.add(new OrderLine(new Item("Imported bottle of perfume", (float) 27.99), 1));
 		e.add(new OrderLine(new Item("bottle of perfume", (float) 18.99), 1));
@@ -222,7 +227,7 @@ public class Foo {
 		e.add(new OrderLine(new Item("box of imported chocolates", (float) 11.25), 1));
 	
 
-		o.put("Order 1", c);
+		o1.put("Order 1", c);
 
 		c.add(new OrderLine(new Item("book", (float) 12.49), 1));
 		c.add(new OrderLine(new Item("music CD", (float) 14.99), 1));
@@ -230,14 +235,14 @@ public class Foo {
 
 
 
-		o.put("Order 2", d);
+		o1.put("Order 2", d);
 		
 	
 
 		d.add(new OrderLine(new Item("imported box of chocolate", 10), 1));
 		d.add(new OrderLine(new Item("imported bottle of perfume", (float) 47.50), 1));
 	
-		new calculator().calculate(o);
+		new calculator().calculate(o1);
 
 	}
 }
